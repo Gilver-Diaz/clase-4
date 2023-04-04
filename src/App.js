@@ -1,25 +1,71 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Item from './components/Item/item';
+import MyFetch from './components/api/index';
+import Counter from './components/CounterWithCustomHook/index.js';
 
 function App() {
+const [ selected, setSelected] = useState (true);
+const [ pasaronTresSegundos, setPasaronTresSegundos] = useState (false);
+
+useEffect (()=>{
+  console.log('despues de 3 segundos');
+
+}, [pasaronTresSegundos] )
+
+
+
+useEffect (()=>{
+  if (selected) {
+  console.log("esta seleccionado");
+  
+  setTimeout(() => {
+    
+    setPasaronTresSegundos (true);
+  }, 3000);
+
+} else {
+    console.log("no esta seleccionado");
+    setPasaronTresSegundos (false);
+} 
+},[selected]);
+
+
+/// EXCEPCIONES DE DEPENDENCIAS EN useEffect
+/*
+useEffect (
+  () =>{
+ console.log("START");
+},[]);
+
+
+useEffect (()=>{
+ console.log("selected", selected);
+} , [selected]);
+*/
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Item
+      isSelected= {selected} 
+      onSelectedChange = {setSelected}>
+        <>
+     
+      <p className='parrafo'>'T-shirt'</p>
+
+      <p>description</p>
+      
+      <div>
+        <button>add</button>
+        </div>
+        </>
+      </Item>
+<>
+     <MyFetch/>
+</>
+   <Counter/>
     </div>
-  );
-}
+  )
+} 
+
 
 export default App;

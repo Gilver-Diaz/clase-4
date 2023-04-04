@@ -1,0 +1,13 @@
+.item{
+    width: 100px;
+    height: 100px;
+    background-color:  yellow;
+    border: 5px solid black;
+}
+
+.item_selected{
+    width: 100px;
+    height: 100px;
+    background-color:  yellow;
+    border: 5px solid red;
+}
